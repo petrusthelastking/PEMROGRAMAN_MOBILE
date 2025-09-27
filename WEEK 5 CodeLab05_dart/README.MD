@@ -11,7 +11,7 @@ PRAKTIKUM 04
 Langkah 1: Text Widget
 ![img.png](img/img2.png)
 
-Langkah 2: Image Widget
+Langkah 2: Image Widgetw
 
 ![img.png](img/img3.png)
 
