@@ -7,8 +7,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ===== titleSection =====
-    final Widget titleSection = Container(
+    // Section judul (dari langkah sebelumnya)
+    final titleSection = Container(
       padding: const EdgeInsets.all(32),
       child: Row(
         children: [
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                 ),
                 Text(
                   'Batu, Malang, Indonesia',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey[600]),
                 ),
               ],
             ),
@@ -37,29 +37,17 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    // ===== buttonSection =====
-    final Color color = Theme.of(context).colorScheme.primary;
-    final Widget buttonSection = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.call, 'CALL'),
-        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-        _buildButtonColumn(color, Icons.share, 'SHARE'),
-      ],
-    );
+    // Warna primer dari tema
+    final primary = Theme.of(context).colorScheme.primary;
 
-    // ===== textSection =====
-    final Widget textSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: const Text(
-        'Carilah teks di internet yang sesuai '
-            'dengan foto atau tempat wisata yang ingin '
-            'Anda tampilkan. '
-            'Tambahkan nama dan NIM Anda sebagai '
-            'identitas hasil pekerjaan Anda. '
-            'Selamat mengerjakan 🙂.',
-        softWrap: true,
-      ),
+    // Section tombol 3 kolom
+    final buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        _buildButtonColumn(primary, Icons.call, 'CALL'),
+        _buildButtonColumn(primary, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(primary, Icons.share, 'SHARE'),
+      ],
     );
 
     return MaterialApp(
@@ -70,27 +58,19 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter layout demo')),
-        // Pakai ListView agar bisa scroll dan tidak overflow
         body: ListView(
           children: [
-            // === Langkah 2: Tambahkan gambar ke body ===
-            Image.asset(
-              'assets/images/lake.png',
-              width: 600,
-              height: 240,
-              fit: BoxFit.cover,
-            ),
             titleSection,
+            const SizedBox(height: 8),
             buttonSection,
-            textSection,
           ],
         ),
       ),
     );
   }
 
-  // Helper kolom tombol (ikon di atas teks)
-  static Column _buildButtonColumn(Color color, IconData icon, String label) {
+  // Langkah 1 — helper kolom tombol
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
