@@ -7,8 +7,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Section judul (dari langkah sebelumnya)
-    final titleSection = Container(
+    // ====== titleSection (Langkah sebelumnya) ======
+    final Widget titleSection = Container(
       padding: const EdgeInsets.all(32),
       child: Row(
         children: [
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                 ),
                 Text(
                   'Batu, Malang, Indonesia',
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: TextStyle(color: Colors.grey),
                 ),
               ],
             ),
@@ -37,16 +37,14 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    // Warna primer dari tema
-    final primary = Theme.of(context).colorScheme.primary;
-
-    // Section tombol 3 kolom
-    final buttonSection = Row(
+    // ====== Langkah 2: buttonSection ======
+    final Color color = Theme.of(context).primaryColor;
+    final Widget buttonSection = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        _buildButtonColumn(primary, Icons.call, 'CALL'),
-        _buildButtonColumn(primary, Icons.near_me, 'ROUTE'),
-        _buildButtonColumn(primary, Icons.share, 'SHARE'),
+      children: [
+        _buildButtonColumn(color, Icons.call, 'CALL'),
+        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(color, Icons.share, 'SHARE'),
       ],
     );
 
@@ -61,7 +59,6 @@ class MyApp extends StatelessWidget {
         body: ListView(
           children: [
             titleSection,
-            const SizedBox(height: 8),
             buttonSection,
           ],
         ),
@@ -69,7 +66,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  // Langkah 1 — helper kolom tombol
+  // Helper kolom tombol (ikon di atas teks)
   Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
       mainAxisSize: MainAxisSize.min,
