@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ====== titleSection (Langkah sebelumnya) ======
+    // ===== titleSection =====
     final Widget titleSection = Container(
       padding: const EdgeInsets.all(32),
       child: Row(
@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    // ====== Langkah 2: buttonSection ======
-    final Color color = Theme.of(context).primaryColor;
+    // ===== buttonSection =====
+    final Color color = Theme.of(context).colorScheme.primary;
     final Widget buttonSection = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -46,6 +46,20 @@ class MyApp extends StatelessWidget {
         _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
         _buildButtonColumn(color, Icons.share, 'SHARE'),
       ],
+    );
+
+    // ===== textSection =====
+    final Widget textSection = Container(
+      padding: const EdgeInsets.all(32),
+      child: const Text(
+        'Carilah teks di internet yang sesuai '
+            'dengan foto atau tempat wisata yang ingin '
+            'Anda tampilkan. '
+            'Tambahkan nama dan NIM Anda sebagai '
+            'identitas hasil pekerjaan Anda. '
+            'Selamat mengerjakan 🙂.',
+        softWrap: true,
+      ),
     );
 
     return MaterialApp(
@@ -60,13 +74,14 @@ class MyApp extends StatelessWidget {
           children: [
             titleSection,
             buttonSection,
+            textSection, // ditambahkan ke body
           ],
         ),
       ),
     );
   }
 
-  // Helper kolom tombol (ikon di atas teks)
+  // Helper: kolom tombol (ikon di atas teks)
   Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
       mainAxisSize: MainAxisSize.min,

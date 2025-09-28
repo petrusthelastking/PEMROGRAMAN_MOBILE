@@ -1,4 +1,4 @@
-Membangun Layout di Flutter
+## Membangun Layout di Flutter
 Langkah 1: Buat Project Baru
 Buatlah sebuah project flutter baru dengan nama layout_flutter. Atau sesuaikan style laporan praktikum yang Anda buat.
 ![img.png](img/img1.png)
@@ -87,7 +87,7 @@ output
 ![img.png](img/img6.png)
 
 
-Praktikum 2: Implementasi button row
+## Praktikum 2: Implementasi button row
 
 Buat method Column _buildButtonColumn
 Bagian tombol berisi 3 kolom yang menggunakan tata letak yang sama—sebuah ikon di atas baris teks. Kolom pada baris ini diberi jarak yang sama, dan teks serta ikon diberi warna primer.
@@ -152,3 +152,65 @@ Widget buttonSection = Row(
 
 output:
 ![img.png](img/img8.png)
+
+Langkah 3: Tambah button section ke body
+Tambahkan variabel buttonSection ke dalam body seperti berikut:
+
+![img.png](img/img9.png)
+
+output:
+![img.png](img/img10.png)
+
+
+Praktikum 3: Implementasi text section
+
+Langkah 1: Buat widget textSection
+Tentukan bagian teks sebagai variabel. Masukkan teks ke dalam Container dan tambahkan padding di sepanjang setiap tepinya. Tambahkan kode berikut tepat di bawah deklarasi buttonSection:
+
+```agsl
+Widget textSection = Container(
+  padding: const EdgeInsets.all(32),
+  child: const Text(
+    'Carilah teks di internet yang sesuai '
+    'dengan foto atau tempat wisata yang ingin '
+    'Anda tampilkan. '
+    'Tambahkan nama dan NIM Anda sebagai '
+    'identitas hasil pekerjaan Anda. '
+    'Selamat mengerjakan 🙂.',
+    softWrap: true,
+  ),
+);
+```
+output
+![img.png](img/img11.png)
+
+Langkah 2: Tambahkan variabel text section ke body
+Tambahkan widget variabel textSection ke dalam body seperti berikut:
+
+![img.png](img/img12.png)
+
+output:
+![img.png](img/img13.png)
+
+
+## Praktikum 4: Implementasi image section
+
+Langkah 1: Siapkan aset gambar
+Anda dapat mencari gambar di internet yang ingin ditampilkan. Buatlah folder images di root project layout_flutter. Masukkan file gambar tersebut ke folder images, lalu set nama file tersebut ke file pubspec.yaml seperti berikut:
+
+![img.png](img/img14.png)
+
+CODE:
+```agsl
+flutter:
+  assets:
+    - assets/images/lake.png
+```
+
+Langkah 2: Tambahkan gambar ke body
+Tambahkan aset gambar ke dalam body seperti berikut:
+
+![img.png](img/img15.png)
+
+Langkah 3: Terakhir, ubah menjadi ListView
+Pada langkah terakhir ini, atur semua elemen dalam ListView, bukan Column, karena ListView mendukung scroll yang dinamis saat aplikasi dijalankan pada perangkat yang resolusinya lebih kecil.
