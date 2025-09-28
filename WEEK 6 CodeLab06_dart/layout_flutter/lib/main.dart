@@ -70,11 +70,17 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter layout demo')),
-        body: ListView(
+        body: ListView( // <- langkah terakhir: ganti Column -> ListView
           children: [
+            Image.asset(
+              'assets/images/lake.png',
+              width: 600,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
             titleSection,
             buttonSection,
-            textSection, // ditambahkan ke body
+            textSection,
           ],
         ),
       ),
@@ -82,7 +88,7 @@ class MyApp extends StatelessWidget {
   }
 
   // Helper: kolom tombol (ikon di atas teks)
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
+  static Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -92,11 +98,7 @@ class MyApp extends StatelessWidget {
           margin: const EdgeInsets.only(top: 8),
           child: Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: color),
           ),
         ),
       ],

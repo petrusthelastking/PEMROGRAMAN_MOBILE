@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
 output:
 ![img.png](img/img3.png)
 
+
 Implementasi title row
 Pertama, Anda akan membuat kolom bagian kiri pada judul. Tambahkan kode berikut di bagian atas metode build() di dalam kelas MyApp:
 ```agsl
@@ -212,5 +213,14 @@ Tambahkan aset gambar ke dalam body seperti berikut:
 
 ![img.png](img/img15.png)
 
+OUTPUT:
+![img.png](img/img16.png)
+
 Langkah 3: Terakhir, ubah menjadi ListView
 Pada langkah terakhir ini, atur semua elemen dalam ListView, bukan Column, karena ListView mendukung scroll yang dinamis saat aplikasi dijalankan pada perangkat yang resolusinya lebih kecil.
+
+![img.png](img/img17.png)
+
+output
+![img.png](img/img18.png)
+
