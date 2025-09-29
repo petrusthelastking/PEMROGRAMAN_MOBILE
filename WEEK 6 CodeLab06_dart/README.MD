@@ -224,3 +224,114 @@ Pada langkah terakhir ini, atur semua elemen dalam ListView, bukan Column, karen
 output
 ![img.png](img/img18.png)
 
+## Praktikum 5: Membangun Navigasi di Flutter
+
+Langkah 2: Mendefinisikan Route
+home_page.dart
+```agsl
+import 'package:flutter/material.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home Page')),
+      body: Center(
+        child: ElevatedButton.icon(
+          icon: const Icon(Icons.arrow_forward),
+          label: const Text('Go to Item Page'),
+          onPressed: () {
+            // contoh: kirim argumen opsional
+            Navigator.pushNamed(
+              context,
+              '/item',
+              arguments: 'Halo dari HomePage',
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+```
+item_page.dart
+```agsl
+import 'package:flutter/material.dart';
+
+class ItemPage extends StatelessWidget {
+  const ItemPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // terima argumen (jika ada)
+    final String? message =
+        ModalRoute.of(context)?.settings.arguments as String?;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Item Page')),
+      body: Center(
+        child: Text(
+          message ?? 'Tidak ada data yang dikirim.',
+          style: Theme.of(context).textTheme.titleMedium,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
+```
+Langkah 3: Lengkapi Kode di main.dart
+Setelah kedua halaman telah dibuat dan didefinisikan, bukalah file main.dart. Pada langkah ini anda akan mendefinisikan Route untuk kedua halaman tersebut. Definisi penamaan route harus bersifat unique. Halaman HomePage didefinisikan sebagai /. Dan halaman ItemPage didefinisikan sebagai /item. Untuk mendefinisikan halaman awal, anda dapat menggunakan named argument initialRoute. Gambaran tahapan ini, dapat anda lihat pada potongan kode berikut.
+
+```agsl
+import 'package:flutter/material.dart';
+import 'pages/home_page.dart';
+import 'pages/item_page.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Routing Demo',
+      // Halaman awal
+      initialRoute: '/',
+      // Daftar route (nama harus unik)
+      routes: {
+        '/': (context) => const HomePage(),   // ganti ke HomePage()
+        '/item': (context) => const ItemPage(), // jika constructor tidak const
+      },
+    ),
+  );
+}
+
+```
+
+Langkah 4: Membuat data model
+Sebelum melakukan perpindahan halaman dari HomePage ke ItemPage, dibutuhkan proses pemodelan data. Pada desain mockup, dibutuhkan dua informasi yaitu nama dan harga. Untuk menangani hal ini, buatlah sebuah file dengan nama item.dart dan letakkan pada folder models. Pada file ini didefinisikan pemodelan data yang dibutuhkan. Ilustrasi kode yang dibutuhkan, dapat anda lihat pada potongan kode berikut.
+```agsl
+
+```
+
+Tugas Praktikum 2
+
+1. Untuk melakukan pengiriman data ke halaman berikutnya, cukup menambahkan informasi arguments pada penggunaan Navigator. 
+Perbarui kode pada bagian Navigator menjadi seperti berikut.
+```agsl
+Navigator.pushNamed(context, '/item', arguments: item);
+```
+2. Pembacaan nilai yang dikirimkan pada halaman sebelumnya dapat dilakukan menggunakan ModalRoute. Tambahkan kode berikut pada blok fungsi build dalam halaman ItemPage. 
+Setelah nilai didapatkan, anda dapat menggunakannya seperti penggunaan variabel pada umumnya. (https://docs.flutter.dev/cookbook/navigation/navigate-with-arguments)
+```agsl
+final itemArgs = ModalRoute.of(context)!.settings.arguments as Item;
+```
+3. Pada hasil akhir dari aplikasi belanja yang telah anda selesaikan, tambahkan atribut foto produk, stok, dan rating. Ubahlah tampilan menjadi GridView seperti di aplikasi marketplace pada umumnya.
+4. Silakan implementasikan Hero widget pada aplikasi belanja Anda dengan mempelajari dari sumber ini: https://docs.flutter.dev/cookbook/navigation/hero-animations
+5. Sesuaikan dan modifikasi tampilan sehingga menjadi aplikasi yang menarik. Selain itu, pecah widget menjadi kode yang lebih kecil. Tambahkan Nama dan NIM di footer aplikasi belanja Anda.
+6. Selesaikan Praktikum 5: Navigasi dan Rute tersebut. Cobalah modifikasi menggunakan plugin go_router, lalu dokumentasikan dan push ke repository Anda berupa screenshot setiap hasil pekerjaan beserta penjelasannya di file README.md. Kumpulkan link commit repository GitHub Anda kepada dosen yang telah disepakati!
+Back
+
+![img.png](img/img19.png)
+![img.png](img/img20.png)
