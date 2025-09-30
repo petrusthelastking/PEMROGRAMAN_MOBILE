@@ -425,5 +425,3 @@ Sebelum melakukan perpindahan halaman dari `HomePage` ke `ItemPage`, dibutuhkan 
     * `img/img7.png`, `img/img8.png`, `img/img9.png`, `img/img10.png`, `img/img11.png`,
     * `img/img12.png`, `img/img13.png`, `img/img14.png`, `img/img15.png`, `img/img16.png`,
     * `img/img17.png`, `img/img18.png`, `img/img19.png`, `img/img20.png`.
-
-> **Tip**: Pastikan struktur folder gambar sesuai dengan project Anda agar seluruh gambar muncul dengan benar di GitHub/Markdown viewer.
