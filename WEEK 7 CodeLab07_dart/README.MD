@@ -232,4 +232,4 @@ overflow: TextOverflow.ellipsis,
 
 **output dari code**
 
-![img.png](img/img1.png)
+![img.png](img/img.png)
