@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
         'https://images.tokopedia.net/img/cache/700/VqbcmM/2021/4/29/42d65f57-4148-43e4-a112-0544520f88a9.jpg',
         stock: 150,
         rating: 4.8,
-        price: 18000),
+        price: 18000, name: ''),
     const Item(
         title: 'Minyak Goreng 2L',
         description:
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         'https://images.tokopedia.net/img/cache/700/hDjmkQ/2023/8/22/e13f4339-7833-4a11-a83d-1a843513b860.jpg',
         stock: 80,
         rating: 4.9,
-        price: 35000),
+        price: 35000, name: ''),
     const Item(
         title: 'Tepung Terigu 1kg',
         description:
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
         'https://images.tokopedia.net/img/cache/700/VqbcmM/2022/9/19/23115c0e-17d4-4a25-83f0-482431b8166c.jpg',
         stock: 200,
         rating: 4.7,
-        price: 12500),
+        price: 12500, name: ''),
     const Item(
         title: 'Kopi Kapal Api 165g',
         description:
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
         'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/10/2/6d1b72e9-f67b-4d43-9831-2911cf2982d6.jpg',
         stock: 95,
         rating: 4.9,
-        price: 15000),
+        price: 15000, name: ''),
   ];
 
   @override

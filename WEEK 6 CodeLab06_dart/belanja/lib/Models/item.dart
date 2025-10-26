@@ -5,6 +5,7 @@ class Item {
   final int stock;
   final double rating;
   final int price;
+  final String name;
 
   const Item({
     required this.title,
@@ -13,5 +14,6 @@ class Item {
     required this.stock,
     required this.rating,
     required this.price,
+    required this.name,
   });
 }
