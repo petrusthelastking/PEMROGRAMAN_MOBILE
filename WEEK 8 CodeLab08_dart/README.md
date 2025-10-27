@@ -4,7 +4,7 @@
 
 Buatlah sebuah project flutter baru dengan nama kamera_flutter, lalu sesuaikan style laporan praktikum yang Anda buat.
 
-![img.png](../img/img1.png)
+![img.png](img/img1.png)
 
 ## Langkah 2: Tambah dependensi yang diperlukan
 
@@ -19,7 +19,7 @@ path → membuat path untuk mendukung berbagai platform.
 Untuk menambahkan dependensi plugin, jalankan perintah flutter pub add seperti berikut di terminal:
 
 ### flutter pub add camera path_provider path
-![img.png](../img/img2.png)
+![img.png](img/img2.png)
 
 ## Langkah 3: Ambil Sensor Kamera
 
@@ -58,7 +58,7 @@ Future<void> main() async {
 }
 ```
 Output
-![img.png](../img/img3.png)
+![img.png](img/img3.png)
 
 ## Langkah 4: Buat dan inisialisasi CameraController
 Setelah Anda dapat mengakses kamera, gunakan langkah-langkah berikut untuk membuat dan menginisialisasi CameraController. Pada langkah berikut ini, Anda akan membuat koneksi ke kamera perangkat yang memungkinkan Anda untuk mengontrol kamera dan menampilkan pratinjau umpan kamera.
@@ -120,7 +120,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 }
 ```
 Output
-![img4.png](../img/img4.png)
+![img4.png](img/img4.png)
 
 ## Langkah 5: Gunakan CameraPreview untuk menampilkan preview foto
 Gunakan widget CameraPreview dari package camera untuk menampilkan preview foto. Anda perlu tipe objek void berupa FutureBuilder untuk menangani proses async.
@@ -150,7 +150,7 @@ Widget build(BuildContext context) {
 }
 ```
 Output
-![img.png](../img.png)
+![img.png](img.png)
 
 ## Langkah 6: Ambil foto dengan CameraController
 Anda dapat menggunakan CameraController untuk mengambil gambar menggunakan metode takePicture(), yang mengembalikan objek XFile, merupakan sebuah objek abstraksi File lintas platform yang disederhanakan. Pada Android dan iOS, gambar baru disimpan dalam direktori cache masing-masing, dan path ke lokasi tersebut dikembalikan dalam XFile.
@@ -198,7 +198,7 @@ Widget build(BuildContext context) {
 ```
 
 Output
-![img.png](../img/img6.png)
+![img.png](img/img6.png)
 
 ## Langkah 7: Buat widget baru DisplayPictureScreen
 Buatlah file baru pada folder widget yang berisi kode berikut.
@@ -227,7 +227,7 @@ class DisplayPictureScreen extends StatelessWidget {
 }
 ```
 Output
-![img.png](../img/img7.png)
+![img.png](img/img7.png)
 
 ## Langkah 8: Edit main.dart
 Edit pada file ini bagian runApp seperti kode berikut.
@@ -256,7 +256,7 @@ Future<void> main() async {
 }
 ```
 Output
-![img.png](../img/img8.png)
+![img.png](img/img8.png)
 
 ## Langkah 9: Menampilkan hasil foto
 Tambahkan kode seperti berikut pada bagian try / catch agar dapat menampilkan hasil foto pada DisplayPictureScreen.
@@ -293,10 +293,10 @@ floatingActionButton: FloatingActionButton(
 ),
 ```
 Output
-![img.png](../img/img10.png)
+![img.png](img/img10.png)
 
 Hasil
-![percobaan kamera.webp](../img/percobaan%20kamera.webp)
+![percobaan kamera.webp](img/percobaan kamera.webp)
 
 # Praktikum 2: Membuat photo filter carousel
 Semua orang tahu bahwa foto akan terlihat lebih bagus dengan filter. Pada codelab ini, Anda akan membuat rangkaian pilihan filter yang dapat digeser sesuai pilihan warna.
@@ -308,7 +308,7 @@ Selesaikan langkah-langkah praktikum berikut ini.
 ## Langkah 1: Buat project baru
 
 Buatlah project flutter baru di pertemuan 09 dengan nama photo_filter_carousel
-![img.png](../img/img11.png)
+![img.png](img/img11.png)
 
 ## Langkah 2: Buat widget Selector ring dan dark gradient
 Buatlah folder widget dan file baru yang berisi kode berikut.
@@ -479,7 +479,7 @@ class _FilterSelectorState extends State<FilterSelector> {
 }
 ```
 Output
-![img.png](../img/img12.png)
+![img.png](img/img12.png)
 Langkah 3: Buat widget photo filter carousel
 Buat file baru di folder widget dengan kode seperti berikut.
 
@@ -559,7 +559,7 @@ class _PhotoFilterCarouselState extends State<PhotoFilterCarousel> {
 ```
 
 Output
-![img.png](../img/img14.png)
+![img.png](img/img14.png)
 
 ## Langkah 4: Membuat filter warna - bagian 1
 Buat file baru di folder widget seperti kode berikut.
@@ -631,7 +631,7 @@ class CarouselFlowDelegate extends FlowDelegate {
 ```
 
 Output
-![img.png](../img/img15.png)
+![img.png](img/img15.png)
 
 Langkah 5: Membuat filter warna
 Buat file baru di folder widget seperti kode berikut ini.
@@ -677,7 +677,7 @@ class FilterItem extends StatelessWidget {
 ```
 
 Output
-![img.png](../img/img16.png)
+![img.png](img/img16.png)
 
 Langkah 6: Implementasi filter carousel
 Terakhir, kita impor widget PhotoFilterCarousel ke main seperti kode berikut ini.
@@ -697,7 +697,7 @@ void main() {
 }
 ```
 Output
-![img.png](../img/img17.png)
+![img.png](img/img17.png)
 
 
 # Menerapkan Kamera dan Filter
@@ -708,10 +708,10 @@ Output
     flutter pub add camera path_provider path
     ```
 3. Merubah versi minSDK menjadi 21 pada file android/app/build.gradle.kts
-![Screenshot 2025-10-26 215045.png](../img/Screenshot%202025-10-26%20215045.png)
+![Screenshot 2025-10-26 215045.png](img/Screenshot 2025-10-26 215045.png)
 
 4. Membuat struktur folder
-![img.png](../img/img18.png)
+![img.png](img/img18.png)
 
 5. Buat file lib/widgets/carousel_flowdelegate.dart dan isi dengan kode berikut:
 
