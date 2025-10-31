@@ -338,3 +338,142 @@ Pada codelab ini, kita akan memperbarui kode dari aplikasi Master Plan dengan me
 Setelah Anda menyelesaikan praktikum 1, Anda dapat melanjutkan praktikum 2 ini. Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau Android Studio atau code editor lain kesukaan Anda.
 
 ## Langkah 1: Buat file plan_notifier.dart
+Buat folder baru provider di dalam folder lib, lalu buat file baru dengan nama plan_provider.dart berisi kode seperti berikut.
+
+![img.png](img.png)
+
+**Code Penjelasan**
+```dart
+import 'package:flutter/material.dart';
+import '../models/data_layer.dart';
+
+class PlanProvider extends InheritedNotifier<ValueNotifier<Plan>> {
+  const PlanProvider({super.key, required Widget child, required
+   ValueNotifier<Plan> notifier})
+  : super(child: child, notifier: notifier);
+
+  static ValueNotifier<Plan> of(BuildContext context) {
+   return context.
+    dependOnInheritedWidgetOfExactType<PlanProvider>()!.notifier!;
+  }
+}
+```
+**Code Penjelasan**
+![img_1.png](13.png)
+
+## Langkah 2: Perbarui file main.dart
+Pada file main.dart, impor plan_provider.dart dan perbarui kode seperti berikut ini.
+```dart
+import 'package:flutter/material.dart';
+import './views/plan_screen.dart';
+import './provider/plan_provider.dart';
+import './models/data_layer.dart';
+
+void main() => runApp(MasterPlanApp());
+
+class MasterPlanApp extends StatelessWidget {
+  const MasterPlanApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.purple),
+      home: PlanProvider(
+        notifier: ValueNotifier<Plan>(const Plan()),
+        child: const PlanScreen(),
+      ),
+    );
+  }
+}
+```
+**Code Penjelasan**
+![img_1.png](14.png)
+
+## Langkah 3: Tambah method pada model plan.dart
+Tambahkan dua method di dalam model class Plan sepe rti kode berikut.
+
+```dart
+int get completedCount => tasks
+  .where((task) => task.complete)
+  .length;
+
+String get completenessMessage =>
+  '$completedCount out of ${tasks.length} tasks';
+```
+
+**Code Penjelasan**
+![img_1.png](15.png)
+
+## Langkah 4: Pindah ke PlanScreen
+Edit PlanScreen agar menggunakan data dari PlanProvider. Hapus deklarasi variabel plan (ini akan membuat error). Kita akan perbaiki pada langkah 5 berikut ini.
+
+```dart
+Plan plan = const Plan(); // <-- HAPUS BARIS INI
+```
+
+**Code Penjelasan**
+![img_1.png](16.png)
+
+## Langkah 5: Edit method _buildAddTaskButton
+Tambahkan BuildContext sebagai parameter dan gunakan PlanProvider sebagai sumber datanya. Edit bagian kode seperti berikut.
+```dart
+Widget _buildAddTaskButton(BuildContext context) {
+  ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
+  return FloatingActionButton(
+    child: const Icon(Icons.add),
+    onPressed: () {
+      Plan currentPlan = planNotifier.value;
+      planNotifier.value = Plan(
+        name: currentPlan.name,
+        tasks: List<Task>.from(currentPlan.tasks)..add(const Task()),
+      );
+    },
+  );
+}
+```
+
+**Code Penjelasan**
+![img_1.png](17.png)
+
+## Langkah 6: Edit method _buildList
+Tambahkan parameter BuildContext, gunakan PlanProvider sebagai sumber data. 
+Ganti TextField menjadi TextFormField untuk membuat inisial data provider menjadi lebih mudah.
+
+```dart
+Widget _buildTaskTile(Task task, int index, BuildContext context) {
+  ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
+  return ListTile(
+    leading: Checkbox(
+       value: task.complete,
+       onChanged: (selected) {
+         Plan currentPlan = planNotifier.value;
+         planNotifier.value = Plan(
+           name: currentPlan.name,
+           tasks: List<Task>.from(currentPlan.tasks)
+             ..[index] = Task(
+               description: task.description,
+               complete: selected ?? false,
+             ),
+         );
+       }),
+    title: TextFormField(
+      initialValue: task.description,
+      onChanged: (text) {
+        Plan currentPlan = planNotifier.value;
+        planNotifier.value = Plan(
+          name: currentPlan.name,
+          tasks: List<Task>.from(currentPlan.tasks)
+            ..[index] = Task(
+              description: text,
+              complete: task.complete,
+            ),
+        );
+      },
+    ),
+  );
+}
+```
+
+**Code Penjelasan**
+![img_1.png](18.png)
+
