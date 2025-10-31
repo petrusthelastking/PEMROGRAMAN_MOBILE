@@ -940,9 +940,6 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
 }
 ```
 
-**Code Penjelasan**
-![img_1.png](28.png)
-
 ## HASIL
 ![img_1.png](HASIL3.png)
 
