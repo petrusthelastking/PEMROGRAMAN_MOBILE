@@ -624,7 +624,7 @@ class PlanProvider extends InheritedNotifier<ValueNotifier<List<Plan>>> {
 ```
 
 **Code Penjelasan**
-![img_1.png](21.png)
+![img_1.png](img/21.png)
 
 ## Langkah 2: Edit main.dart
 Langkah sebelumnya dapat menyebabkan error pada main.dart dan plan_screen.dart. 
@@ -659,7 +659,7 @@ class MasterPlanApp extends StatelessWidget {
 ```
 
 **Code Penjelasan**
-![img_1.png](22.png)
+![img_1.png](img/22.png)
 
 ## Langkah 3: Edit plan_screen.dart
 Tambahkan variabel plan dan atribut pada constructor-nya seperti berikut.
@@ -669,7 +669,7 @@ final Plan plan;
 const PlanScreen({super.key, required this.plan});
 ```
 **Code Penjelasan**
-![img_1.png](23.png)
+![img_1.png](img/23.png)
 
 ## Langkah 4: Error
 Itu akan terjadi error setiap kali memanggil PlanProvider.of(context). 
@@ -684,7 +684,7 @@ Plan get plan => widget.plan;
 ```
 
 **Code Penjelasan**
-![img_1.png](24.png)
+![img_1.png](img/24.png)
 
 ## Langkah 6: Method initState()
 Pada bagian ini kode tetap seperti berikut.
@@ -751,7 +751,7 @@ Pastikan Anda telah merubah ke List dan mengubah nilai pada currentPlan seperti 
 ```
 
 **Code Penjelasan**
-![img_1.png](25.png)
+![img_1.png](img/25.png)
 
 ## Langkah 8: Edit _buildTaskTile
 Pastikan ubah ke List dan variabel planNotifier seperti kode berikut ini.
@@ -801,7 +801,7 @@ Widget _buildTaskTile(Task task, int index, BuildContext context) {
 ```
 
 **Code Penjelasan**
-![img_1.png](26.png)
+![img_1.png](img/26.png)
 
 
 ## Langkah 9: Buat screen baru
@@ -834,7 +834,7 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
 ```
 
 **Code Penjelasan**
-![img_1.png](27.png)
+![img_1.png](img/27.png)
 
 
 ## Langkah 10: Isi _PlanCreatorScreenState
@@ -941,7 +941,7 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
 ```
 
 ## HASIL
-![img_1.png](HASIL3.png)
+![img_1.png](img/HASIL3.png)
 
 
 ## Tugas Praktikum 3
