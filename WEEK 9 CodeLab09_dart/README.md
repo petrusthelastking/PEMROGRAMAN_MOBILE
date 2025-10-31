@@ -76,4 +76,37 @@ class MasterPlanApp extends StatelessWidget {
 }
 ```
 **#### Code Penjelasan**
+![5.png](img/5.png)
+
+## Langkah 6: buat plan_screen.dart
+Pada folder views, buatlah sebuah file plan_screen.dart dan gunakan templat StatefulWidget untuk membuat class PlanScreen. 
+Isi kodenya adalah sebagai berikut. Gantilah teks ‘Namaku' dengan nama panggilan Anda pada title AppBar.
+
+````dart
+import '../models/data_layer.dart';
+import 'package:flutter/material.dart';
+
+class PlanScreen extends StatefulWidget {
+  const PlanScreen({super.key});
+
+  @override
+  State createState() => _PlanScreenState();
+}
+
+class _PlanScreenState extends State<PlanScreen> {
+  Plan plan = const Plan();
+
+  @override
+  Widget build(BuildContext context) {
+   return Scaffold(
+   
+    appBar: AppBar(title: const Text('Master Plan Muhammad Rifda Musyaffa')),
+    body: _buildList(), 
+    floatingActionButton: _buildAddTaskButton(), 
+   );
+  }
+}
+````
+
+**#### Code Penjelasan**
 ![6.png](img/6.png)
