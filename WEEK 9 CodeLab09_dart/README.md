@@ -53,3 +53,27 @@ export 'task.dart';
 ```
 #### Code Penjelasan
 ![img.png](img/img.png)
+
+## Langkah 5: Pindah ke file main.dart
+Hapus semua kode yang ada di dalam main.dart dan ganti dengan kode ini
+
+```dart
+import 'package:flutter/material.dart';
+import './views/plan_screen.dart';
+
+void main() => runApp(MasterPlanApp());
+
+class MasterPlanApp extends StatelessWidget {
+  const MasterPlanApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+     theme: ThemeData(primarySwatch: Colors.purple),
+     home: PlanScreen(), 
+    );
+  }
+}
+```
+#### Code Penjelasan
+![6.png](img/6.png)
