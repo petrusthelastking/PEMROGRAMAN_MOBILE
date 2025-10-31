@@ -359,7 +359,7 @@ class PlanProvider extends InheritedNotifier<ValueNotifier<Plan>> {
 }
 ```
 **Code Penjelasan**
-![img_1.png](13.png)
+![img_1.png](img/13.png)
 
 ## Langkah 2: Perbarui file main.dart
 Pada file main.dart, impor plan_provider.dart dan perbarui kode seperti berikut ini.
@@ -387,7 +387,7 @@ class MasterPlanApp extends StatelessWidget {
 }
 ```
 **Code Penjelasan**
-![img_1.png](14.png)
+![img_1.png](img/14.png)
 
 ## Langkah 3: Tambah method pada model plan.dart
 Tambahkan dua method di dalam model class Plan sepe rti kode berikut.
@@ -402,7 +402,7 @@ String get completenessMessage =>
 ```
 
 **Code Penjelasan**
-![img_1.png](15.png)
+![img_1.png](img/15.png)
 
 ## Langkah 4: Pindah ke PlanScreen
 Edit PlanScreen agar menggunakan data dari PlanProvider. Hapus deklarasi variabel plan (ini akan membuat error). Kita akan perbaiki pada langkah 5 berikut ini.
@@ -412,7 +412,7 @@ Plan plan = const Plan(); // <-- HAPUS BARIS INI
 ```
 
 **Code Penjelasan**
-![img_1.png](16.png)
+![img_1.png](img/16.png)
 
 ## Langkah 5: Edit method _buildAddTaskButton
 Tambahkan BuildContext sebagai parameter dan gunakan PlanProvider sebagai sumber datanya. Edit bagian kode seperti berikut.
@@ -433,7 +433,7 @@ Widget _buildAddTaskButton(BuildContext context) {
 ```
 
 **Code Penjelasan**
-![img_1.png](17.png)
+![img_1.png](img/17.png)
 
 ## Langkah 6: Edit method _buildList
 Tambahkan parameter BuildContext, gunakan PlanProvider sebagai sumber data. 
@@ -475,5 +475,528 @@ Widget _buildTaskTile(Task task, int index, BuildContext context) {
 ```
 
 **Code Penjelasan**
-![img_1.png](18.png)
+![img_1.png](img/18.png)
+
+## Langkah 7: Edit method _buildList
+Sesuaikan parameter pada bagian _buildTaskTile seperti kode berikut.
+
+```dart
+Widget _buildList(Plan plan) {
+   return ListView.builder(
+     controller: scrollController,
+     itemCount: plan.tasks.length,
+     itemBuilder: (context, index) =>
+        _buildTaskTile(plan.tasks[index], index, context),
+   );
+}
+```
+
+**Code Penjelasan**
+![img_1.png](img/19.png)
+
+## Langkah 8: Tetap di class PlanScreen
+Edit method build sehingga bisa tampil progress pada bagian bawah (footer). 
+Caranya, bungkus (wrap) _buildList dengan widget Expanded dan masukkan ke dalam widget Column seperti kode pada Langkah 9.
+
+## Langkah 9: Tambah widget SafeArea
+Terakhir, tambahkan widget SafeArea dengan berisi completenessMessage pada akhir widget Column. Perhatikan kode berikut ini.
+
+```dart
+@override
+Widget build(BuildContext context) {
+   return Scaffold(
+     appBar: AppBar(title: const Text('Master Plan')),
+     body: ValueListenableBuilder<Plan>(
+       valueListenable: PlanProvider.of(context),
+       builder: (context, plan, child) {
+         return Column(
+           children: [
+             Expanded(child: _buildList(plan)),
+             SafeArea(child: Text(plan.completenessMessage))
+           ],
+         );
+       },
+     ),
+     floatingActionButton: _buildAddTaskButton(context),
+   );
+}
+```
+
+**Code Penjelasan**
+![img_1.png](img/20.png)
+
+## HASIL
+![img_1.png](img/hasil2.png)
+
+## 6. Tugas Praktikum 2: InheritedWidget
+1. Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md! 
+Jika Anda menemukan ada yang error atau tidak berjalan dengan baik, silakan diperbaiki sesuai dengan tujuan aplikasi tersebut dibuat.
+2. Jelaskan mana yang dimaksud InheritedWidget pada langkah 1 tersebut! Mengapa yang digunakan InheritedNotifier?
+3. Jelaskan maksud dari method di langkah 3 pada praktikum tersebut! Mengapa dilakukan demikian?
+4. Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+5. Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke dosen yang telah disepakati !
+
+Jawab:
+### 2. InheritedWidget vs InheritedNotifier
+Mana yang dimaksud InheritedWidget?
+Pada Langkah 1, yang dimaksud InheritedWidget adalah class PlanProvider itu sendiri.
+
+Lebih tepatnya, PlanProvider adalah custom class yang kita buat, yang mewarisi (extends) InheritedNotifier. InheritedNotifier sendiri adalah sub-class atau varian khusus dari InheritedWidget.
+
+Jadi, PlanProvider adalah InheritedWidget yang memiliki kemampuan tambahan dari InheritedNotifier.
+
+Mengapa digunakan InheritedNotifier?
+Kita menggunakan InheritedNotifier (bukan InheritedWidget biasa) karena kita ingin UI secara otomatis diperbarui ketika datanya berubah.
+
+InheritedWidget biasa pandai meneruskan data ke bawah (ke widget tree), tapi ia tidak tahu kapan data itu berubah kecuali kita memberitahunya secara manual.
+InheritedNotifier dirancang khusus untuk "mendengarkan" sebuah Listenable (dalam praktikum ini adalah ValueNotifier<Plan>).
+Alurnya begini:
+
+PlanProvider (sebuah InheritedNotifier) menyimpan ValueNotifier<Plan>.
+Ketika kita mengubah data (misal, menambah tugas), kita sebenarnya mengubah .value dari ValueNotifier tersebut (Langkah 5 & 6).
+ValueNotifier "berteriak" (memberi notifikasi) bahwa nilainya telah berubah.
+PlanProvider (yang mendengarkan "teriakan" itu) secara otomatis memberi tahu semua widget di bawahnya yang "tergantung" padanya (yang memanggil PlanProvider.of(context)) untuk membangun ulang (rebuild) dirinya.
+Inilah mengapa di Langkah 9, ValueListenableBuilder bisa secara ajaib memperbarui tampilan teks progres saat Anda mencentang checkbox.
+
+### 3. Maksud Method di Langkah 3
+Langkah 3 menambahkan dua getter (properti turunan) ke dalam class Plan:
+```dart
+int get completedCount => ...;
+String get completenessMessage => ...;
+```
+Maksudnya adalah:
+
+completedCount: Ini adalah getter yang menghitung jumlah tugas yang sudah selesai. Ia memeriksa seluruh List<Task> dan menghitung berapa banyak Task yang propertinya complete == true.
+completenessMessage: Ini adalah getter yang membuat pesan status (teks) yang rapi untuk ditampilkan di UI. Ia mengambil hasil dari completedCount dan jumlah total tugas (tasks.length) untuk membuat string seperti: "2 out of 5 tasks".
+Mengapa dilakukan demikian?
+
+Ini adalah inti dari arsitektur Model-View (Pemisahan Logika).
+
+Model (class Plan) bertanggung jawab atas data dan logika bisnis (dalam hal ini, cara menghitung progres).
+View (PlanScreen) bertanggung jawab hanya untuk menampilkan data.
+Daripada menulis logika penghitungan ini di dalam PlanScreen, kita menempatkannya di dalam class Plan itu sendiri. Dengan cara ini, kode di PlanScreen (View) menjadi sangat bersih. 
+Ia tidak perlu tahu cara menghitung progres; ia hanya perlu "meminta" hasilnya dengan memanggil plan.completenessMessage.
+
+### 4. Hasil Langkah 9 (Simulasi GIF dan Penjelasan)
+
+Penjelasan Apa yang Telah Dibuat (Langkah 9)
+Langkah 9 adalah langkah final yang mengikat semuanya. Kita mengganti body dari Scaffold dengan widget ValueListenableBuilder.
+
+Apa itu ValueListenableBuilder? Ini adalah widget khusus yang tugasnya "mendengarkan" ValueNotifier (yang kita simpan di PlanProvider).
+
+Fungsi builder: di dalamnya akan secara otomatis dijalankan ulang setiap kali nilai di dalam PlanProvider berubah.
+
+Apa hasilnya? Kita membuat UI yang reaktif. Di dalam builder, kita membuat Column yang berisi:
+
+Expanded(_buildList(plan)): Daftar tugas kita.
+SafeArea(Text(plan.completenessMessage)): Teks progres dari Langkah 3.
+Setiap kali mencentang checkbox (yang mengubah data di PlanProvider), ValueListenableBuilder mendeteksinya dan langsung membangun ulang Text di bagian bawah dengan pesan progres yang baru.
+
+
+Praktikum 3: Membuat State di Multiple Screens
+Satu kalimat populer atau viral yang beredar dalam komunitas Flutter adalah "Lift State Up". Mantra ini merujuk ke sebuah ide di mana objek State seharusnya berada lebih tinggi dari pada widget yang membutuhkannya di dalam sebuah widget tree. InheritedWidget yang telah kita buat sebelumnya bekerja dengan sempurna pada satu screen, tapi apa yang akan terjadi jika kita tambah screen kedua ?
+
+Pada codelab ini, Anda akan menambah screen lain pada aplikasi Master Plan sehingga bisa membuat kelompok daftar plan lebih dari satu.
+
+Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau Android Studio atau code editor lain kesukaan Anda.
+
+Perhatian: Diasumsikan Anda telah berhasil menyelesaikan praktikum 2.
+
+## Langkah 1: Edit PlanProvider
+Perhatikan kode berikut, edit class PlanProvider sehingga dapat menangani List Plan.
+```dart
+import 'package:flutter/material.dart';
+import '../models/data_layer.dart';
+
+class PlanProvider extends InheritedNotifier<ValueNotifier<List<Plan>>> {
+  const PlanProvider({
+    super.key,
+    required Widget child,
+    required ValueNotifier<List<Plan>> notifier, 
+  }) : super(child: child, notifier: notifier);
+
+  static ValueNotifier<List<Plan>> of(BuildContext context) { 
+    return context
+        .dependOnInheritedWidgetOfExactType<PlanProvider>()!
+        .notifier!;
+  }
+}
+```
+
+**Code Penjelasan**
+![img_1.png](21.png)
+
+## Langkah 2: Edit main.dart
+Langkah sebelumnya dapat menyebabkan error pada main.dart dan plan_screen.dart. 
+Pada method build, gantilah menjadi kode seperti ini.
+
+```dart
+import 'package:flutter/material.dart';
+import './provider/plan_provider.dart';
+import './models/data_layer.dart';
+import './views/plan_creator_screen.dart'; 
+
+void main() => runApp(const MasterPlanApp());
+
+class MasterPlanApp extends StatelessWidget {
+  const MasterPlanApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return PlanProvider(
+      notifier: ValueNotifier<List<Plan>>(const []),
+      child: MaterialApp(
+        title: 'State management app',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const PlanCreatorScreen(), 
+      ),
+    );
+  }
+}
+```
+
+**Code Penjelasan**
+![img_1.png](22.png)
+
+## Langkah 3: Edit plan_screen.dart
+Tambahkan variabel plan dan atribut pada constructor-nya seperti berikut.
+
+```dart
+final Plan plan;
+const PlanScreen({super.key, required this.plan});
+```
+**Code Penjelasan**
+![img_1.png](23.png)
+
+## Langkah 4: Error
+Itu akan terjadi error setiap kali memanggil PlanProvider.of(context). 
+Itu terjadi karena screen saat ini hanya menerima tugas-tugas untuk satu kelompok Plan, 
+tapi sekarang PlanProvider menjadi list dari objek plan tersebut.
+
+## Langkah 5: Tambah getter Plan
+
+Tambahkan getter pada _PlanScreenState seperti kode berikut.
+```dart
+Plan get plan => widget.plan;
+```
+
+**Code Penjelasan**
+![img_1.png](24.png)
+
+## Langkah 6: Method initState()
+Pada bagian ini kode tetap seperti berikut.
+
+```dart
+@override
+void initState() {
+   super.initState();
+   scrollController = ScrollController()
+    ..addListener(() {
+      FocusScope.of(context).requestFocus(FocusNode());
+    });
+}
+```
+
+## Langkah 7: Widget build
+Pastikan Anda telah merubah ke List dan mengubah nilai pada currentPlan seperti kode berikut ini.
+
+```dart
+ @override
+  Widget build(BuildContext context) {
+    ValueNotifier<List<Plan>> plansNotifier = PlanProvider.of(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(plan.name)),
+      body: ValueListenableBuilder<List<Plan>>(
+        valueListenable: plansNotifier,
+        builder: (context, plans, child) {
+          Plan currentPlan = plans.firstWhere((p) => p.name == plan.name);
+          return Column(
+            children: [
+              Expanded(child: _buildList(currentPlan)),
+              SafeArea(child: Text(currentPlan.completenessMessage)),
+            ],
+          );
+        },
+      ),
+      floatingActionButton: _buildAddTaskButton(
+        context,
+      ),
+    );
+  }
+
+  Widget _buildAddTaskButton(BuildContext context) {
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+    return FloatingActionButton(
+      child: const Icon(Icons.add),
+      onPressed: () {
+        Plan currentPlan = plan; 
+        int planIndex =
+            planNotifier.value.indexWhere((p) => p.name == currentPlan.name);
+        
+        List<Task> updatedTasks = List<Task>.from(currentPlan.tasks)
+          ..add(const Task());
+        
+        planNotifier.value = List<Plan>.from(planNotifier.value)
+          ..[planIndex] = Plan(
+            name: currentPlan.name,
+            tasks: updatedTasks,
+          );
+      },
+    );
+  }
+```
+
+**Code Penjelasan**
+![img_1.png](25.png)
+
+## Langkah 8: Edit _buildTaskTile
+Pastikan ubah ke List dan variabel planNotifier seperti kode berikut ini.
+
+```dart
+Widget _buildTaskTile(Task task, int index, BuildContext context) {
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+
+    return ListTile(
+      leading: Checkbox(
+          value: task.complete,
+          onChanged: (selected) {
+            Plan currentPlan = plan; 
+            int planIndex = planNotifier.value
+                .indexWhere((p) => p.name == currentPlan.name);
+            
+            planNotifier.value = List<Plan>.from(planNotifier.value)
+              ..[planIndex] = Plan(
+                name: currentPlan.name,
+                tasks: List<Task>.from(currentPlan.tasks)
+                  ..[index] = Task(
+                    description: task.description,
+                    complete: selected ?? false,
+                  ),
+              );
+          }),
+      title: TextFormField(
+        initialValue: task.description,
+        onChanged: (text) {
+          Plan currentPlan = plan; 
+          int planIndex =
+              planNotifier.value.indexWhere((p) => p.name == currentPlan.name);
+          
+          planNotifier.value = List<Plan>.from(planNotifier.value)
+            ..[planIndex] = Plan(
+              name: currentPlan.name,
+              tasks: List<Task>.from(currentPlan.tasks)
+                ..[index] = Task(
+                  description: text,
+                  complete: task.complete,
+                ),
+            );
+        },
+      ),
+    );
+  }
+```
+
+**Code Penjelasan**
+![img_1.png](26.png)
+
+
+## Langkah 9: Buat screen baru
+Pada folder view, buatlah file baru dengan nama plan_creator_screen.dart dan deklarasikan dengan StatefulWidget bernama PlanCreatorScreen. 
+Gantilah di main.dart pada atribut home menjadi seperti berikut.
+
+```dart
+import 'package.flutter/material.dart';
+import '../models/data_layer.dart';
+import '../provider/plan_provider.dart';
+import './plan_screen.dart'; 
+
+class PlanCreatorScreen extends StatefulWidget {
+  const PlanCreatorScreen({super.key});
+
+  @override
+  State<PlanCreatorScreen> createState() => _PlanCreatorScreenState();
+}
+
+class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+    );
+  }
+}
+```
+
+**Code Penjelasan**
+![img_1.png](27.png)
+
+
+## Langkah 10: Isi _PlanCreatorScreenState
+```dart
+import 'package:flutter/material.dart';
+import '../models/data_layer.dart';
+import '../provider/plan_provider.dart';
+import './plan_screen.dart'; 
+
+class PlanCreatorScreen extends StatefulWidget {
+  const PlanCreatorScreen({super.key});
+
+  @override
+  State<PlanCreatorScreen> createState() => _PlanCreatorScreenState();
+}
+
+class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
+  
+  final textController = TextEditingController();
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  // Langkah 11: Method build utama
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Master Plans Rifda')),
+      body: Column(children: [
+        _buildListCreator(),
+        Expanded(child: _buildMasterPlans())
+      ]),
+    );
+  }
+
+  // Langkah 12: Widget untuk TextField
+  Widget _buildListCreator() {
+    return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Material(
+          color: Theme.of(context).cardColor,
+          elevation: 10,
+          child: TextField(
+              controller: textController,
+              decoration: const InputDecoration(
+                  labelText: 'Add a plan',
+                  contentPadding: EdgeInsets.all(20)),
+              onEditingComplete: addPlan),
+        ));
+  }
+
+  // Langkah 13: Logika untuk menambah Rencana baru
+  void addPlan() {
+    final text = textController.text;
+    if (text.isEmpty) {
+      return;
+    }
+    final plan = Plan(name: text, tasks: []);
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+    
+    planNotifier.value = List<Plan>.from(planNotifier.value)..add(plan);
+    
+    textController.clear();
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
+  // Langkah 14: Widget untuk menampilkan daftar Rencana (VERSI DIPERBAIKI)
+  Widget _buildMasterPlans() {
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+
+    return ValueListenableBuilder<List<Plan>>(
+      valueListenable: planNotifier,
+      builder: (context, plans, child) {
+        
+        if (plans.isEmpty) {
+          return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Icon(Icons.note, size: 100, color: Colors.grey),
+                Text('Anda belum memiliki rencana apapun.',
+                    style: Theme.of(context).textTheme.headlineSmall)
+              ]);
+        }
+
+        return ListView.builder(
+            itemCount: plans.length,
+            itemBuilder: (context, index) {
+              final plan = plans[index];
+              return ListTile(
+                  title: Text(plan.name),
+                  subtitle: Text(plan.completenessMessage),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => PlanScreen(plan: plan)));
+                  });
+            });
+      },
+    );
+  }
+}
+```
+
+**Code Penjelasan**
+![img_1.png](28.png)
+
+## HASIL
+![img_1.png](HASIL3.png)
+
+
+## Tugas Praktikum 3
+1. Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md! Jika Anda menemukan ada yang error atau tidak berjalan dengan baik, 
+silakan diperbaiki sesuai dengan tujuan aplikasi tersebut dibuat.
+2. Berdasarkan Praktikum 3 yang telah Anda lakukan, jelaskan maksud dari gambar diagram berikut ini!
+
+![img_1.png](DIAGRAM .png)
+
+3. Lakukan capture hasil dari Langkah 14 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+4. Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke dosen yang telah disepakati !
+
+### Jawab:
+#### 2. Penjelasan Diagram Widget Tree
+   Gambar tersebut dengan sempurna merangkum arsitektur state management "Lift State Up" yang Anda bangun di Praktikum 3.
+
+Diagram ini menunjukkan dua kondisi widget tree yang berbeda:
+
+1. Sisi Kiri (Biru): PlanCreatorScreen
+   Ini adalah widget tree untuk halaman utama Anda (PlanCreatorScreen).
+
+Poin Penting: Perhatikan bahwa PlanProvider berada di atas PlanCreatorScreen. (Dalam kode Anda, PlanProvider bahkan berada di atas MaterialApp). Ini adalah kunci dari "Lift State Up".
+Struktur: Halaman ini terdiri dari Column yang berisi TextField (untuk menambah rencana baru) dan Expanded berisi ListView (untuk menampilkan daftar semua rencana Anda).
+2. Sisi Kanan (Hijau): PlanScreen
+   Ini adalah widget tree untuk halaman detail Anda (PlanScreen) setelah Anda melakukan navigasi.
+
+Struktur: Halaman ini berisi Column yang memiliki Expanded berisi ListView (untuk menampilkan daftar tugas dari satu rencana) dan SafeArea berisi Text (untuk menampilkan progres tugas).
+3. Panah Navigator Push
+   Panah ini adalah aksi yang menghubungkan kedua layar.
+
+Maksudnya: Ketika pengguna mengetuk sebuah item di dalam ListView di sisi kiri (halaman PlanCreatorScreen), aplikasi menjalankan Navigator.push.
+Aksi ini "mendorong" layar PlanScreen (sisi kanan) ke atas tumpukan navigasi, sambil mengirimkan data Plan spesifik yang diketuk tersebut.
+Kesimpulan: Diagram ini menunjukkan bahwa PlanProvider hidup di level yang lebih tinggi daripada kedua layar. Karena PlanProvider ada di atas, PlanCreatorScreen (kiri) dapat menambah rencana baru ke dalamnya, dan PlanScreen (kanan) dapat membaca dan memperbarui rencana yang sama. Keduanya berbagi satu sumber data (state) yang sama.
+
+
+#### 3. Penjelasan Langkah 14
+Langkah 14 adalah implementasi dari method _buildMasterPlans() di dalam PlanCreatorScreen. Ini adalah "jantung" dari halaman utama.
+
+Apa yang dibuat: Anda membuat sebuah widget yang tugasnya membangun daftar semua rencana Anda (bagian ListView di sisi kiri diagram).
+
+Berikut adalah rincian tugasnya:
+
+Mendengarkan State: Widget ini "mendengarkan" data dari PlanProvider (idealnya menggunakan ValueListenableBuilder seperti yang saya pandu) untuk mendapatkan List<Plan> terbaru.
+
+Menangani Kondisi Kosong: Ia mengecek jika daftar (plans) tersebut kosong. Jika ya, ia menampilkan pesan "Anda belum memiliki rencana apapun."
+
+Membangun Daftar: Jika daftar tidak kosong, ia membuat ListView.builder.
+
+Membuat ListTile: Untuk setiap plan di dalam daftar, ia membuat sebuah ListTile (satu baris di daftar) yang menampilkan:
+
+title: Nama rencana (plan.name).
+subtitle: Progres rencana (plan.completenessMessage).
+Menangani Navigasi (onTap): Ini adalah bagian terpenting. Anda menambahkan fungsi onTap pada ListTile. Fungsi inilah yang menjalankan Navigator.push (panah di diagram) untuk mengirim pengguna ke PlanScreen sambil membawa data plan yang baru saja mereka ketuk.
+
 
