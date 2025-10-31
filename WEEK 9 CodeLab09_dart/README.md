@@ -254,3 +254,87 @@ Terakhir, tambahkan method dispose() berguna ketika widget sudah tidak digunakan
 
 ## HASIL
 ![HASIL.png](img/HASIL.png)
+
+## Tugas Praktikum 1: Dasar State dengan Model-View
+Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md! Jika Anda menemukan ada yang error atau tidak berjalan dengan baik, silakan diperbaiki.
+
+Jelaskan maksud dari langkah 4 pada praktikum tersebut! Mengapa dilakukan demikian?
+
+Mengapa perlu variabel plan di langkah 6 pada praktikum tersebut? Mengapa dibuat konstanta ?
+
+Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+
+Apa kegunaan method pada Langkah 11 dan 13 dalam lifecyle state ?
+
+Kumpulkan laporan praktikum Anda berupa link commit atau repository GitHub ke dosen yang telah disepakati !
+
+### Jawab:
+1. Maksud dari Langkah 4 (data_layer.dart)
+Langkah 4 adalah praktik pengorganisasian kode yang baik. File data_layer.dart dibuat sebagai file "pembungkus" (exporter).
+Isinya hanya:
+```dart
+export 'plan.dart';
+export 'task.dart';
+```
+
+Mengapa dilakukan demikian?
+Tujuannya adalah untuk menyederhanakan proses import di file lain.
+
+* Tanpa data_layer.dart: Jika file plan_screen.dart membutuhkan kedua model, Anda harus mengimpornya satu per satu:
+```dart
+import '../models/plan.dart';
+import '../models/task.dart';
+```
+* Dengan data_layer.dart: Anda hanya perlu mengimpor satu file:
+```dart
+import '../models/data_layer.dart';
+```
+Ini membuat kode lebih bersih dan mudah dikelola, terutama saat aplikasi berkembang dan jumlah model bertambah.
+
+2. Variabel plan di Langkah 6 
+
+Mengapa perlu variabel plan?
+Variabel plan (Plan plan = const Plan();) adalah state (data) utama untuk halaman PlanScreen. 
+Variabel inilah yang menyimpan semua informasi yang perlu ditampilkan di layar, yaitu daftar tugas (List<Task>).
+
+* _buildList() membaca dari variabel plan ini untuk tahu tugas apa saja yang harus ditampilkan.
+* _buildAddTaskButton() memodifikasi variabel plan untuk menambah tugas baru.
+* _buildTaskTile() juga memodifikasi variabel plan untuk memperbarui status tugas (misalnya menandai tugas sebagai selesai atau mengubah deskripsi tugas).
+
+Mengapa dibuat const Plan()?
+Membuatnya sebagai const Plan() memberikan beberapa keuntungan:
+* Immutability: Objek Plan yang dibuat dengan const bersifat immutable (tidak dapat diubah). Ini membantu mencegah perubahan tidak sengaja pada data, yang penting dalam manajemen state.
+  * Performance: Objek const dapat dioptimalkan oleh Dart, sehingga penggunaan memori menjadi
+  * lebih efisien.
+  * Predictability: Dengan menggunakan const, Anda memastikan bahwa objek Plan awal selalu dalam keadaan default (kosong), sehingga memudahkan debugging dan pengujian.
+  * Konsistensi: Setiap kali Anda membuat Plan baru tanpa parameter, Anda mendapatkan instance yang sama, yang dapat membantu dalam perbandingan dan pengujian.
+  * Best Practice: Menggunakan const untuk objek yang tidak perlu diubah adalah praktik yang baik dalam pemrograman Dart/Flutter, karena membantu menjaga kode tetap bersih dan efisien.
+
+3. Hasil dari Langkah 9 (Simulasi GIF)
+   Saya tidak dapat membuat file GIF, tetapi saya akan menjelaskan apa yang akan Anda lihat di hasil Langkah 9 jika Anda merekamnya:
+
+4. Kegunaan Method initState dan dispose
+Kedua method ini adalah bagian penting dari "Siklus Hidup" (Lifecycle) sebuah StatefulWidget.
+* initState():
+  * Kegunaan: Method ini dipanggil sekali ketika State objek dibuat. Ini adalah tempat yang tepat untuk menginisialisasi data atau sumber daya yang dibutuhkan oleh widget.
+  * Dalam konteks praktikum, initState() digunakan untuk menginisialisasi ScrollController dan menambahkan listener padanya. Listener ini akan merespons event scroll dengan menghapus fokus dari semua TextField, yang penting untuk pengalaman pengguna di iOS.
+dispose() (Langkah 13)
+  * Kegunaan: Method ini dipanggil ketika State objek akan dihapus dari pohon widget. Ini adalah tempat yang tepat untuk membersihkan sumber daya yang tidak lagi dibutuhkan.
+  * Dalam konteks praktikum, dispose() digunakan untuk membuang (dispose) ScrollController ketika widget tidak lagi digunakan. Ini penting untuk mencegah memory leaks, karena ScrollController mungkin masih mendengarkan event scroll bahkan setelah widget dihapus jika tidak dibuang dengan benar.
+Dengan menggunakan initState() dan dispose() dengan benar, Anda memastikan bahwa sumber daya dikelola dengan baik, yang meningkatkan kinerja aplikasi dan mencegah potensi masalah memori.
+
+## Praktikum 2: Mengelola Data Layer dengan InheritedWidget dan InheritedNotifier
+Bagaimana seharusnya Anda mengakses data pada aplikasi?
+
+Beberapa pilihan yang bisa dilakukan adalah meletakkan data dalam satu kelas yang sama sehingga menjadi bagian dari life cycle aplikasi Anda.
+
+Kemudian muncul pertanyaan, bagaimana meletakkan model dalam pohon widget ? sedangkan model bukanlah widget, sehingga tidak akan tampil pada screen.
+
+Solusi yang memungkinkan adalah menggunakan InheritedWidget. Sejauh ini kita hanya menggunakan dua jenis widget, yaitu StatelessWidget dan StatefulWidget. Kedua widget tersebut digunakan untuk layouting UI di screen. Di mana satu bersifat statis dan dinamis. 
+Sedangkan InheritedWidget itu berbeda, ia dapat meneruskan data ke sub-widget turunannya (biasanya ketika Anda menerapkan decomposition widget). Jika dilihat dari perspektif user, itu tidak akan terlihat prosesnya (invisible). InheritedWidget dapat digunakan sebagai pintu untuk komunikasi antara view dan data layers.
+
+Pada codelab ini, kita akan memperbarui kode dari aplikasi Master Plan dengan memisahkan data todo list ke luar class view-nya.
+
+Setelah Anda menyelesaikan praktikum 1, Anda dapat melanjutkan praktikum 2 ini. Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau Android Studio atau code editor lain kesukaan Anda.
+
+## Langkah 1: Buat file plan_notifier.dart
