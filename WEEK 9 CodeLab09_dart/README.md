@@ -41,3 +41,15 @@ class Plan {
 ```
 #### Code Penjelasan
 ![4.png](img/4.png)
+
+
+## Langkah 4: Buat file data_layer.dart
+Kita dapat membungkus beberapa data layer ke dalam sebuah file yang nanti akan mengekspor kedua model tersebut. Dengan begitu, 
+proses impor akan lebih ringkas seiring berkembangnya aplikasi. Buat file bernama data_layer.dart di folder models. Kodenya hanya berisi export seperti berikut.
+
+```dart
+export 'plan.dart';
+export 'task.dart';
+```
+#### Code Penjelasan
+![5.png](img/5.png)
