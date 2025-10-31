@@ -76,7 +76,7 @@ class MasterPlanApp extends StatelessWidget {
 }
 ```
 **#### Code Penjelasan**
-![5.png](img/5.png)
+![4.png](img/4.png)
 
 ## Langkah 6: buat plan_screen.dart
 Pada folder views, buatlah sebuah file plan_screen.dart dan gunakan templat StatefulWidget untuk membuat class PlanScreen. 
@@ -109,4 +109,148 @@ class _PlanScreenState extends State<PlanScreen> {
 ````
 
 **#### Code Penjelasan**
-![6.png](img/6.png)
+![5.png](img/5.png)
+
+## Langkah 7: buat method _buildAddTaskButton()
+Anda akan melihat beberapa error di langkah 6, karena method yang belum dibuat.
+Ayo kita buat mulai dari yang paling mudah yaitu tombol Tambah Rencana. Tambah
+kode berikut di bawah method build di dalam class _PlanScreenState.
+
+```dart
+Widget _buildAddTaskButton() {
+    return FloatingActionButton(
+     child: const Icon(Icons.add),
+     onPressed: () {
+       setState(() {
+        plan = Plan(
+         name: plan.name,
+         tasks: List<Task>.from(plan.tasks)
+         ..add(const Task()),
+       );
+      });
+     },
+    );
+  }
+```
+
+**#### Code Penjelasan**
+![img.png](img/6.png)
+
+## Langkah 8: buat widget _buildList()
+Kita akan buat widget berupa List yang dapat dilakukan scroll, yaitu ListView.builder.
+Buat widget ListView seperti kode berikut ini.
+```dart
+Widget _buildList() {
+    return ListView.builder(
+     itemCount: plan.tasks.length,
+     itemBuilder: (context, index) =>
+     _buildTaskTile(plan.tasks[index], index), 
+    );
+  }
+```
+
+**#### Code Penjelasan**
+![7.png](img/7.png)
+
+## Langkah 9: buat widget _buildTaskTile()
+Dari langkah 8, kita butuh ListTile untuk menampilkan setiap nilai dari plan.tasks. Kita
+buat dinamis untuk setiap index data, sehingga membuat view menjadi lebih mudah. Tambahkan kode berikut ini
+
+```dart
+Widget _buildTaskTile(Task task, int index) {
+    return ListTile(
+      leading: Checkbox(
+          value: task.complete,
+          onChanged: (selected) {
+            setState(() {
+              plan = Plan(
+                name: plan.name,
+                tasks: List<Task>.from(plan.tasks)
+                  ..[index] = Task(
+                    description: task.description,
+                    complete: selected ?? false,
+                  ),
+              );
+            });
+          }),
+      title: TextFormField(
+        initialValue: task.description,
+        onChanged: (text) {
+          setState(() {
+            plan = Plan(
+              name: plan.name,
+              tasks: List<Task>.from(plan.tasks)
+                ..[index] = Task(
+                  description: text,
+                  complete: task.complete,
+                ),
+            );
+          });
+        },
+      ),
+    );
+  }
+```
+
+**#### Code Penjelasan**
+![8.png](img/8.png)
+
+## Langkah 10: Tambah Scroll Controller
+Anda dapat menambah tugas sebanyak-banyaknya, menandainya jika sudah beres, dan melakukan scroll jika sudah semakin banyak isinya. Namun, ada salah satu fitur tertentu di iOS perlu kita tambahkan. Ketika keyboard tampil, Anda akan kesulitan untuk mengisi yang paling bawah. Untuk mengatasi itu, 
+Anda dapat menggunakan ScrollController untuk menghapus focus dari semua TextField selama event scroll dilakukan. Pada file plan_screen.dart, tambahkan variabel scroll controller di class State tepat setelah variabel plan.
+
+```dart
+late ScrollController scrollController;
+```
+**#### Code Penjelasan**
+![img.png](img/9.png)
+
+## Langkah 11: Tambah Scroll Listener'
+
+Tambahkan method initState() setelah deklarasi variabel scrollController seperti kode berikut.
+
+```dart
+@override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController()
+      ..addListener(() {
+        FocusScope.of(context).requestFocus(FocusNode());
+      });
+  }
+```
+**#### Code Penjelasan**
+![img.png](img/10.png)
+
+## Langkah 12: Tambah controller dan keyboard behavior
+Tambahkan controller dan keyboard behavior pada ListView di method _buildList seperti kode berikut ini.
+
+```dart
+return ListView.builder(
+  controller: scrollController,
+ keyboardDismissBehavior: Theme.of(context).platform ==
+ TargetPlatform.iOS
+          ? ScrollViewKeyboardDismissBehavior.onDrag
+          : ScrollViewKeyboardDismissBehavior.manual,
+```
+
+**#### Code Penjelasan**
+![img.png](img/11.png)
+
+## Langkah 13: Terakhir, tambah method dispose()
+
+Terakhir, tambahkan method dispose() berguna ketika widget sudah tidak digunakan lagi.
+
+```dart
+@override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+```
+
+**#### Code Penjelasan**
+![img.png](img/12.png)
+
+## HASIL
+![HASIL.png](img/HASIL.png)
