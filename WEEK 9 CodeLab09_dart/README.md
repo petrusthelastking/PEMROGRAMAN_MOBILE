@@ -28,3 +28,16 @@ class Task {
 ![3.png](img/3.png)
 
 ## Langkah 3: Buat file plan.dart
+Kita juga perlu sebuah List untuk menyimpan daftar rencana dalam aplikasi to-do ini. Buat file plan.dart di dalam folder models dan isi kode seperti berikut.
+```dart
+import './task.dart';
+
+class Plan {
+  final String name;
+  final List<Task> tasks;
+
+  const Plan({this.name = '', this.tasks = const []});
+}
+```
+#### Code Penjelasan
+![4.png](img/4.png)
