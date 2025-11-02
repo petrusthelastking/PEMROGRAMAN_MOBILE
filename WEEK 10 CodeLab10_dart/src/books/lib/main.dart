@@ -4,6 +4,8 @@ import 'package:async/async.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
+import 'geolocation.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
       ),
-      home: const FuturePage(),
+      home: LocationScreen(),
     );
   }
 }
@@ -150,7 +152,7 @@ class _FuturePageState extends State<FuturePage> {
                   .then((value) {
                    setState(() {
                      result = 'Success';
-                   }); 
+                   });
               }).catchError((onError) {
                 setState(() {
                   result = onError.toString();
