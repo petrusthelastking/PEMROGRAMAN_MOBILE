@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 10 CodeLab10_dart/src/books/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 10 CodeLab10_dart/src/books/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 10 CodeLab10_dart/src/books/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 5 CodeLab05_dart/hello_world/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 5 CodeLab05_dart/hello_world/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 5 CodeLab05_dart/hello_world/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/basic_layout_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/basic_layout_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/basic_layout_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/belanja/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/layout_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/layout_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 6 CodeLab06_dart/layout_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 7 CodeLab07_dart/flutter_plugin_pubdev/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 7 CodeLab07_dart/flutter_plugin_pubdev/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 7 CodeLab07_dart/flutter_plugin_pubdev/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_filter_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_filter_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_filter_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 8 CodeLab08_dart/src/kamera_flutter/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 9 CodeLab09_dart/src/master_plan/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 9 CodeLab09_dart/src/master_plan/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/WEEK 9 CodeLab09_dart/src/master_plan/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Week-11 CodeLab11_dart/books/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Week-11 CodeLab11_dart/books/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Week-11 CodeLab11_dart/books/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
